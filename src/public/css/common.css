@@ -1,0 +1,47 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    height: 80px;
+    padding: 0 30px;
+    background-color: black;
+}
+
+.header__logo {
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 300px;
+}
+
+.main {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+@media screen and (max-width: 1024px) {
+    .header {
+        height: 60px;
+        padding: 0 20px;
+    }
+
+    .header__logo {
+        width: 200px;
+    }
+
+    svg {
+        width: 200px;
+    }
+}

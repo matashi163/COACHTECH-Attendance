@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RecordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/attendance');
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::group(['prefix' => '/attendance'], function () {
+        Route::get('/', [RecordController::class, 'viewRecord']);
+    });
 });
