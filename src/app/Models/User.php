@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Status;
 
 class User extends Authenticatable
 {
@@ -15,5 +16,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'status_id',
     ];
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class);
+    }
 }

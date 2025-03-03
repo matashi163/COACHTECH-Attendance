@@ -1,0 +1,56 @@
+.record__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.status {
+    padding: 5px 20px;
+    color: #696969;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #c8c8c8;
+    border-radius: 44px;
+}
+
+.date {
+    padding: 30px 0;
+    font-size: 40px;
+}
+
+.time {
+    padding-bottom: 50px;
+    font-size: 80px;
+    font-weight: bold;
+}
+
+.buttons {
+    display: flex;
+}
+
+.button {
+    text-align: center;
+    width: 250px;
+    padding: 10px 0;
+    margin: 0 30px;
+    font-size: 40px;
+    font-weight: bold;
+    background-color: black;
+    border-radius: 20px;
+    text-decoration: none;
+}
+
+.button--black {
+    color: white;
+    background-color: black;
+}
+
+.button--white {
+    color: black;
+    background-color: white;
+}
+
+.button--text {
+    font-size: 30px;
+    font-weight: bold;
+}
