@@ -6,18 +6,18 @@
 
 @section('content')
 <div class="record__content">
-    <p class="status">{{$status->status}}</p>
+    <p class="status">{{$user->status->status}}</p>
     <p class="date"><span id="date"></span></p>
     <p class="time"><span id="time"></span></p>
     <div class="buttons">
-        @if($status->id === 1)
-        <a href="" class="button button--black">出勤</a>
-        @elseif($status->id === 2)
-        <a href="" class="button button--black">退勤</a>
-        <a href="" class="button button--white">休憩入</a>
-        @elseif($status->id === 3)
-        <a href="" class="button button--white">休憩戻</a>
-        @elseif($status->id === 4)
+        @if($user->status->id === 1)
+        <a href="/attendance/work/start" class="button button--black">出勤</a>
+        @elseif($user->status->id === 2)
+        <a href="/attendance/work/finish" class="button button--black">退勤</a>
+        <a href="/attendance/break/start" class="button button--white">休憩入</a>
+        @elseif($user->status->id === 3)
+        <a href="/attendance/break/finish" class="button button--white">休憩戻</a>
+        @elseif($user->status->id === 4)
         <p class="button--text">お疲れ様でした。</p>
         @endif
     </div>

@@ -21,5 +21,13 @@ Route::get('/', function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => '/attendance'], function () {
         Route::get('/', [RecordController::class, 'viewRecord']);
+        Route::group(['prefix' => '/work'], function () {
+            Route::get('/start', [RecordController::class, 'workStart']);
+            Route::get('/finish', [RecordController::class, 'workFinish']);
+        });
+        Route::group(['prefix' => '/break'], function () {
+            Route::get('/start', [RecordController::class, 'breakStart']);
+            Route::get('/finish', [RecordController::class, 'breakFinish']);
+        });
     });
 });

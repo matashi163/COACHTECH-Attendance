@@ -23,4 +23,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Status::class);
     }
+
+    public function workTimes()
+    {
+        return $this->hasMany(WorkTime::class);
+    }
 }
