@@ -15,9 +15,24 @@
     background-color: #f0eff2;
 }
 
+.title {
+    padding: 0 20px;
+    margin-top: 80px;
+    margin-bottom: 50px;
+    width: 90%;
+    max-width: 1000px;
+    min-width: 700px;
+    font-size: 30px;
+    border-left: 10px solid #000;
+}
+
 @media screen and (max-width: 1024px) {
     .header__button {
         padding: 0 10px;
         font-size: 20px;
+    }
+
+    .title {
+        margin-top: 50px;
     }
 }

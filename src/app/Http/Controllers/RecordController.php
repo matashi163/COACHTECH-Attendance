@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\WorkTime;
 use App\Models\BreakTime;
-use Illuminate\Support\Carbon;
 
 class RecordController extends Controller
 {
     public function viewRecord()
     {
         $user = User::find(auth()->id());
-        $today = Carbon::today()->startOfDay();
+        $today = Carbon::today();
         $latestWorkTime = $user->workTimes()->orderBy('created_at', 'desc')->first();
         $latestBreakTime = $latestWorkTime ? $latestWorkTime->breakTimes()->orderBy('created_at', 'desc')->first() : null;
 
@@ -30,9 +30,7 @@ class RecordController extends Controller
             $user->update(['status_id' => '1']);
         }
 
-        $nowTime = now();
-
-        return view('record', compact('user', 'nowTime'));
+        return view('record', compact('user'));
     }
 
     public function workStart()
@@ -50,7 +48,7 @@ class RecordController extends Controller
     public function workFinish()
     {
         $user = User::find(auth()->id());
-        $today = Carbon::today()->startOfDay();
+        $today = Carbon::today();
         $latestWorkTime = $user->workTimes()->orderBy('created_at', 'desc')->first();
         $workTime = Carbon::parse($latestWorkTime->start_time);
 
@@ -90,7 +88,7 @@ class RecordController extends Controller
     public function breakFinish()
     {
         $user = User::find(auth()->id());
-        $today = Carbon::today()->startOfDay();
+        $today = Carbon::today();
         $latestWorkTime = $user->workTimes()->orderBy('created_at', 'desc')->first();
         $latestBreakTime = $latestWorkTime->breakTimes()->orderBy('created_at', 'desc')->first();
         $breakTime = Carbon::parse($latestBreakTime->start_time);

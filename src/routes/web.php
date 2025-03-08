@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecordController;
+use App\Http\Controllers\ListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,5 +30,6 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/start', [RecordController::class, 'breakStart']);
             Route::get('/finish', [RecordController::class, 'breakFinish']);
         });
+        Route::get('/list', [ListController::class, 'viewList']);
     });
 });
