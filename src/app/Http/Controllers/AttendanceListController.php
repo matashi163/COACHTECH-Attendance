@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\User;
-use App\Models\WorkTime;
-use App\Models\BreakTime;
 
-class ListController extends Controller
+class AttendanceListController extends Controller
 {
-    public function viewList(Request $request)
+    public function viewAttendanceList(Request $request)
     {
         $user = User::find(auth()->id());
         $now = Carbon::now();
@@ -49,6 +47,6 @@ class ListController extends Controller
             }
         }
 
-        return view('list', compact('month', 'attendanceDatas'));
+        return view('attendance_list', compact('month', 'attendanceDatas'));
     }
 }

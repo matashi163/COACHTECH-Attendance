@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecordController;
-use App\Http\Controllers\ListController;
+use App\Http\Controllers\AttendanceListController;
+use App\Http\Controllers\DetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/start', [RecordController::class, 'breakStart']);
             Route::get('/finish', [RecordController::class, 'breakFinish']);
         });
-        Route::get('/list', [ListController::class, 'viewList']);
+        Route::get('/list', [AttendanceListController::class, 'viewAttendanceList']);
+        Route::get('/{date}', [DetailController::class, 'viewDetail']);
     });
 });
