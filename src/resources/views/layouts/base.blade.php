@@ -12,7 +12,7 @@
 
 <body>
     <header class="header">
-        <a href="/" class="header__logo">
+        <div class="header__logo">
             <svg xmlns="http://www.w3.org/2000/svg" width="300" height="32" viewBox="0 0 300 32" fill="none" class="logo__svg">
                 <g clip-path="url(#clip0_161_1026)">
                     <rect width="300" height="32" fill="black" />
@@ -33,7 +33,7 @@
                     </clipPath>
                 </defs>
             </svg>
-        </a>
+        </div>
         @yield('header')
     </header>
     <main class="main">

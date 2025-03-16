@@ -3,8 +3,6 @@
 namespace App\Http\Requests;
 
 use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
 
 class LoginRequest extends FortifyLoginRequest
 {
@@ -29,21 +27,10 @@ class LoginRequest extends FortifyLoginRequest
             'email' => [
                 'required',
                 'email',
-                function ($attribute, $value, $fail) {
-                    if (!User::where('email', $value)->exists()) {
-                        $fail('ログイン情報が登録されていません');
-                    }
-                },
             ],
             'password' => [
                 'required',
                 'min:8',
-                function ($attribute, $value, $fail) {
-                    $user = User::where('email', $this->email)->first();
-                    if ($user && !Hash::check($value, $user->password)) {
-                        $fail('パスワードが正しくありません');
-                    }
-                },
             ],
         ];
     }

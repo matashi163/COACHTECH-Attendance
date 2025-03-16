@@ -1,9 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\AttendanceListController;
 use App\Http\Controllers\DetailController;
+use App\Http\Controllers\AttendanceListAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +21,17 @@ use App\Http\Controllers\DetailController;
 Route::get('/', function () {
     return redirect('/attendance');
 });
+Route::get('/register', function () {
+    return view('auth.register');
+});
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+Route::get('/admin/login', function () {
+    return view('auth.admin_login');
+})->name('admin.login');
 
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth:web'], function () {
     Route::group(['prefix' => '/attendance'], function () {
         Route::get('/', [RecordController::class, 'viewRecord']);
         Route::group(['prefix' => '/work'], function () {
@@ -32,6 +43,17 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('/finish', [RecordController::class, 'breakFinish']);
         });
         Route::get('/list', [AttendanceListController::class, 'viewAttendanceList']);
-        Route::get('/{date}', [DetailController::class, 'viewDetail']);
     });
+});
+
+Route::group(['middleware' => 'auth:admin'], function () {
+    Route::group(['prefix' => '/admin'], function () {
+        Route::group(['prefix' => '/attendance'], function () {
+            Route::get('/list', [AttendanceListAdminController::class, 'viewAttendanceListAdmin']);
+        });
+    });
+});
+
+Route::group(['middleware' => 'multi_auth'], function () {
+    Route::get('/attendance/{userId}', [DetailController::class, 'viewDetail']);
 });

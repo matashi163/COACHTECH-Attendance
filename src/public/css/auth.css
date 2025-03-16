@@ -60,6 +60,9 @@
 }
 
 .auth__transition {
+    display: inline-block;
+    height: 24px;
+    width: 128px;
     color: #0073CC;
     text-decoration: none;
 }

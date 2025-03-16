@@ -15,16 +15,13 @@ class AttendanceListController extends Controller
 
         $month = $request->has('month') ? Carbon::parse($request->month)->startOfMonth() : $now->startOfMonth();
 
-        $previousMonth = $month->copy()->subMonth();
-        $nextMonth = $month->copy()->addMonth();
-
         $attendanceDatas = [];
         for ($day = $month->copy()->startOfMonth(); $day <= $month->copy()->endOfMonth(); $day->addDay()) {
-            $work = $user->worktimes()->whereDate('start_time', $day->format('Y-m-d'))->first();
+            $work = $user->workTimes()->whereDate('start_time', $day->format('Y-m-d'))->first();
 
             if ($work && $work->finish_time) {
                 $breakTotal = 0;
-                foreach ($work->breaktimes as $break) {
+                foreach ($work->breakTimes as $break) {
                     if ($break->start_time && $break->finish_time) {
                         $breakTotal += Carbon::parse($break->start_time)->diffInSeconds(Carbon::parse($break->finish_time));
                     }
@@ -38,7 +35,7 @@ class AttendanceListController extends Controller
                     'work_finish' => Carbon::parse($work->finish_time)->format('H:i'),
                     'break_time' => sprintf('%d:%02d', floor($breakTotal / 3600), floor(($breakTotal % 3600) / 60)),
                     'work_time' => sprintf('%d:%02d', floor($workTotal / 3600), floor(($workTotal % 3600) / 60)),
-                    'detail_url' => $day->format('Y-m-d'),
+                    'detail_url' => '/attendance/' . $user->id . '?date=' . $day->format('Y-m-d'),
                 ];
             } else {
                 $attendanceDatas[] = [

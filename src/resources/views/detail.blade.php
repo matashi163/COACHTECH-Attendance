@@ -1,4 +1,4 @@
-@extends('layouts.app_user')
+@extends('layouts.app_' . $auth)
 
 @section('app_css')
 <link rel="stylesheet" href="{{asset('css/detail.css')}}">
@@ -14,7 +14,7 @@
                 <p class="form__label">名前</p>
                 <div class="form__input">
                     <p class="form__input--name">{{$attendanceData['name']}}</p>
-                    <input type="hidden" name="name" value="西 怜奈">
+                    <input type="hidden" name="name" value="{{$attendanceData['name']}}">
                 </div>
             </div>
             <div class="form__group">

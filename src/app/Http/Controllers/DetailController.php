@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
 class DetailController extends Controller
 {
-    public function viewDetail($date)
+    public function viewDetail($userId, Request $request)
     {
-        $user = User::find(auth()->id());
-        $workTime = $user->workTimes()->whereDate('start_time', $date)->first();
+        if (Auth::guard('web')->check()) {
+            $auth = 'user';
+        } elseif (Auth::guard('admin')->check()) {
+            $auth = 'admin';
+        }
+
+        $user = User::find($userId);
+        $workTime = $user->workTimes()->whereDate('start_time', $request->date)->first();
         $breakTimes = $workTime->breakTimes;
 
         $breakData = [];
@@ -23,12 +31,12 @@ class DetailController extends Controller
 
         $attendanceData = [
             'name' => $user->name,
-            'date' => Carbon::parse($date),
+            'date' => Carbon::parse($request->date),
             'work_start' => Carbon::parse($workTime->start_time),
             'work_finish' => Carbon::parse($workTime->finish_time),
             'break_times' => $breakData,
         ];
 
-        return view('detail', compact('attendanceData'));
+        return view('detail', compact('auth', 'attendanceData'));
     }
 }
