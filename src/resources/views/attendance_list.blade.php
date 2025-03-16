@@ -1,14 +1,14 @@
-@extends('layouts.app_user')
+@extends('layouts.app_' . $auth)
 
 @section('app_css')
 <link rel="stylesheet" href="{{asset('css/attendance_list.css')}}">
 @endsection
 
 @section('content')
-<h1 class="title">勤怠一覧</h1>
+<h1 class="title">{{$title}}</h1>
 <div class="attendance-list__content">
     <div class="select-list">
-        <a href="/attendance/list?month={{$month->copy()->subMonth()}}" class="select-list__transition">
+        <a href="{{$url . '?month=' . $month->copy()->subMonth()->format('Y-m')}}" class="select-list__transition">
             <img src="{{Storage::url('view_images/arrow.png')}}" alt="←" class="select-list__transition--image">
             <p class="select-list__transition--text">前月</p>
         </a>
@@ -16,7 +16,7 @@
             <img src="{{Storage::url('view_images/calendar.png')}}" alt="📅" class="select-list__current--image">
             <p class="select-list__current--text">{{$month->locale('ja')->isoFormat('YYYY/MM')}}</p>
         </div>
-        <a href="/attendance/list?month={{$month->copy()->addMonth()}}" class="select-list__transition">
+        <a href="{{$url . '?month=' . $month->copy()->addMonth()->format('Y-m')}}" class="select-list__transition">
             <p class="select-list__transition--text">翌月</p>
             <img src="{{Storage::url('view_images/arrow.png')}}" alt="←" class="select-list__transition--image arrow-reverse">
         </a>

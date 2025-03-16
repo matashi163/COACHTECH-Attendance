@@ -3,15 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\User;
 
 class AttendanceListController extends Controller
 {
-    public function viewAttendanceList(Request $request)
+    public function viewAttendanceList($userId = null, Request $request)
     {
-        $user = User::find(auth()->id());
         $now = Carbon::now();
+
+        if (Auth::guard('web')->check()) {
+            $auth = 'user';
+            $user = User::find(auth()->id());
+            $title = '勤怠一覧';
+            $url = '/attendance/list';
+        } elseif (Auth::guard('admin')->check()) {
+            $auth = 'admin';
+            $user = User::find($userId);
+            $title = $user->name . 'さんの勤怠';
+            $url = '/admin/attendance/staff/' . $user->id;
+        }
 
         $month = $request->has('month') ? Carbon::parse($request->month)->startOfMonth() : $now->startOfMonth();
 
@@ -44,6 +56,6 @@ class AttendanceListController extends Controller
             }
         }
 
-        return view('attendance_list', compact('month', 'attendanceDatas'));
+        return view('attendance_list', compact('auth', 'title', 'url', 'month', 'attendanceDatas'));
     }
 }

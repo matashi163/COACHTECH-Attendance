@@ -6,6 +6,7 @@ use App\Http\Controllers\RecordController;
 use App\Http\Controllers\AttendanceListController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\AttendanceListAdminController;
+use App\Http\Controllers\StaffListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +51,9 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::group(['prefix' => '/admin'], function () {
         Route::group(['prefix' => '/attendance'], function () {
             Route::get('/list', [AttendanceListAdminController::class, 'viewAttendanceListAdmin']);
+            Route::get('/staff/{userId}', [AttendanceListController::class, 'viewAttendanceList']);
         });
+        Route::get('/staff/list', [StaffListController::class, 'viewStaffList']);
     });
 });
 
