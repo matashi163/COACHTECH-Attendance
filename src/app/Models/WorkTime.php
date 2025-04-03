@@ -16,4 +16,14 @@ class WorkTime extends Model
     {
         return $this->hasMany(BreakTime::class);
     }
+
+    public function correctedWorkTimes()
+    {
+        return $this->hasMany(CorrectedWorkTime::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

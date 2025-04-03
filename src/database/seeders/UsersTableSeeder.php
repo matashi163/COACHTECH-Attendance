@@ -22,6 +22,30 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'status_id' => '1',
             ],
+            [
+                'name' => '二郎',
+                'email' => 'jirou@example.com',
+                'password' => Hash::make('password'),
+                'status_id' => '1',
+            ],
+            [
+                'name' => '三郎',
+                'email' => 'saburou@example.com',
+                'password' => Hash::make('password'),
+                'status_id' => '1',
+            ],
+            [
+                'name' => '四郎',
+                'email' => 'shirou@example.com',
+                'password' => Hash::make('password'),
+                'status_id' => '1',
+            ],
+            [
+                'name' => '五郎',
+                'email' => 'gorou@example.com',
+                'password' => Hash::make('password'),
+                'status_id' => '1',
+            ],
         ];
 
         User::insert($users);

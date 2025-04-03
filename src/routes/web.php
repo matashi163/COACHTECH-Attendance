@@ -7,6 +7,7 @@ use App\Http\Controllers\AttendanceListController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\AttendanceListAdminController;
 use App\Http\Controllers\StaffListController;
+use App\Http\Controllers\CorrectionListController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,13 @@ Route::get('/register', function () {
     return view('auth.register');
 });
 Route::get('/login', function () {
+    Auth::guard('web')->logout();
+    Auth::guard('admin')->logout();
     return view('auth.login');
 })->name('login');
 Route::get('/admin/login', function () {
+    Auth::guard('web')->logout();
+    Auth::guard('admin')->logout();
     return view('auth.admin_login');
 })->name('admin.login');
 
@@ -59,4 +64,6 @@ Route::group(['middleware' => 'auth:admin'], function () {
 
 Route::group(['middleware' => 'multi_auth'], function () {
     Route::get('/attendance/{userId}', [DetailController::class, 'viewDetail']);
+    Route::post('/attendance/{userId}', [DetailController::class, 'correct']);
+    Route::get('/stamp_correction_request/list', [CorrectionListController::class, 'viewCorrectionList']);
 });

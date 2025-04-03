@@ -13,7 +13,6 @@
 
 .form__content {
     width: 100%;
-    margin-bottom: 50px;
     background-color: white;
     border-radius: 10px;
 }
@@ -64,6 +63,19 @@
     resize: none;
 }
 
+.form__input--non-active {
+    border-style: none;
+    pointer-events: none;
+}
+
+.form__error {
+    width: 100%;
+    height: 50px;
+    padding: 10px 0;
+    color: red;
+    font-size: 18px;
+}
+
 .form__button {
     display: flex;
     justify-content: center;
@@ -76,4 +88,9 @@
     background-color: black;
     border: none;
     border-radius: 10px;
+}
+
+.form__button--text {
+    font-size: 16px;
+    color: red;
 }

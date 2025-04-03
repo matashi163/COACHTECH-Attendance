@@ -12,7 +12,6 @@ use Laravel\Fortify\Contracts\RegisterResponse;
 use Laravel\Fortify\Contracts\LoginResponse;
 use App\Http\Requests\LoginRequest;
 use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -67,7 +66,9 @@ class FortifyServiceProvider extends ServiceProvider
                         'password' => ['パスワードが正しくありません'],
                     ]);
                 }
+
                 Auth::guard('admin')->login($user);
+
                 return $user;
             } else {
                 $user = User::where('email', $request->email)->first();
@@ -81,7 +82,9 @@ class FortifyServiceProvider extends ServiceProvider
                         'password' => ['パスワードが正しくありません'],
                     ]);
                 }
+
                 Auth::guard('web')->login($user);
+
                 return $user;
             }
         });

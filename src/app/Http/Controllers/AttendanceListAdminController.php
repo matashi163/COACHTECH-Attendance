@@ -25,10 +25,8 @@ class AttendanceListAdminController extends Controller
             if ($work) {
                 $breakTotal = 0;
                 foreach ($work->breakTimes as $break) {
-                    foreach ($work->breakTimes as $break) {
-                        if ($break->start_time && $break->finish_time) {
-                            $breakTotal += Carbon::parse($break->start_time)->diffInSeconds(Carbon::parse($break->finish_time));
-                        }
+                    if ($break->start_time && $break->finish_time) {
+                        $breakTotal += Carbon::parse($break->start_time)->diffInSeconds(Carbon::parse($break->finish_time));
                     }
                 }
 
