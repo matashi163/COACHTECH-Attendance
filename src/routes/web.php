@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\AttendanceListController;
 use App\Http\Controllers\DetailController;
@@ -23,19 +24,9 @@ use App\Http\Controllers\CorrectionListController;
 Route::get('/', function () {
     return redirect('/attendance');
 });
-Route::get('/register', function () {
-    return view('auth.register');
-});
-Route::get('/login', function () {
-    Auth::guard('web')->logout();
-    Auth::guard('admin')->logout();
-    return view('auth.login');
-})->name('login');
-Route::get('/admin/login', function () {
-    Auth::guard('web')->logout();
-    Auth::guard('admin')->logout();
-    return view('auth.admin_login');
-})->name('admin.login');
+Route::get('/register', [AuthController::class, 'viewRegister']);
+Route::get('/login', [AuthController::class, 'viewLogin'])->name('login');
+Route::get('/admin/login', [AuthController::class, 'viewLoginAdmin'])->name('admin.login');
 
 Route::group(['middleware' => 'auth:web'], function () {
     Route::group(['prefix' => '/attendance'], function () {
