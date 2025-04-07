@@ -13,6 +13,8 @@
 | 三郎       | saburou@example.com | password   | 
 | 四郎       | shirou@example.com  | password   | 
 | 五郎       | gorou@example.com   | password   | 
+| ---------- | -------------- | ---------- | 
+| 管理者     | admin@exmaple.com   | password   | 
 
 ## 機能一覧
 - 会員登録
