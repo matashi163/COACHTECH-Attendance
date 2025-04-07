@@ -9,7 +9,7 @@ use Carbon\Carbon;
 use App\Models\Status;
 use App\Models\User;
 
-class BreakTest extends TestCase
+class WorkFinishTest extends TestCase
 {
     /**
      * A basic feature test example.
@@ -53,61 +53,29 @@ class BreakTest extends TestCase
         $this->actingAs($user);
     }
 
-    public function test_start_button()
+    public function test_button()
     {
         $response = $this->get('/attendance/work/start');
         $response = $this->get('/attendance');
 
         $response->assertStatus(200);
 
-        $response->assertSee('休憩入');
+        $response->assertSee('退勤');
 
-        $response = $this->get('/attendance/break/start');
+        $response = $this->get('/attendance/work/finish');
         $response = $this->get('/attendance');
 
         $response->assertStatus(200);
 
-        $response->assertSee('休憩中');
-    }
-
-    public function test_start_many_times()
-    {
-        $response = $this->get('/attendance/work/start');
-        $response = $this->get('/attendance/break/start');
-        $response = $this->get('/attendance/break/finish');
-        $response = $this->get('/attendance');
-
-        $response->assertStatus(200);
-
-        $response->assertSee('休憩入');
-    }
-
-    public function test_finish_button()
-    {
-        $response = $this->get('/attendance/work/start');
-        $response = $this->get('/attendance/break/start');
-        $response = $this->get('/attendance');
-
-        $response->assertStatus(200);
-
-        $response->assertSee('休憩戻');
-
-        $response = $this->get('/attendance/break/finish');
-        $response = $this->get('/attendance');
-
-        $response->assertStatus(200);
-
-        $response->assertSee('勤務中');
+        $response->assertSee('退勤済');
     }
 
     public function test_record()
     {
         $response = $this->get('/attendance/work/start');
-        $response = $this->get('/attendance/break/start');
-        $response = $this->get('/attendance/break/finish');
+        $response = $this->get('/attendance/work/finish');
 
-        $this->assertDatabaseHas('break_times', [
-            'start_time' => Carbon::now(),
+        $this->assertDatabaseHas('work_times', [
             'finish_time' => Carbon::now(),
         ]);
     }
