@@ -58,7 +58,7 @@ class FortifyServiceProvider extends ServiceProvider
                 $user = Admin::where('email', $request->email)->first();
                 if (!$user) {
                     throw ValidationException::withMessages([
-                        'email' => ['管理者としてのログイン情報が登録されていません。'],
+                        'email' => ['管理者としてのログイン情報が登録されていません'],
                     ]);
                 }
                 if (!Hash::check($request->password, $user->password)) {
@@ -74,7 +74,7 @@ class FortifyServiceProvider extends ServiceProvider
                 $user = User::where('email', $request->email)->first();
                 if (!$user) {
                     throw ValidationException::withMessages([
-                        'email' => ['ログイン情報が登録されていません。'],
+                        'email' => ['ログイン情報が登録されていません'],
                     ]);
                 }
                 if (!Hash::check($request->password, $user->password)) {

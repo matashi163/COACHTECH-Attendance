@@ -7,8 +7,8 @@
 @section('content')
 <div class="record__content">
     <p class="status">{{$user->status->status}}</p>
-    <p class="date"><span id="date"></span></p>
-    <p class="time"><span id="time"></span></p>
+    <p class="date"><span id="date">{{$now->isoFormat('YYYY年MM月DD日(ddd)')}}</span></p>
+    <p class="time"><span id="time">{{$now->format('H:i')}}</span></p>
     <div class="buttons">
         @if($user->status->id === 1)
         <a href="/attendance/work/start" class="button button--black">出勤</a>

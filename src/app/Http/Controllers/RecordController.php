@@ -12,6 +12,7 @@ class RecordController extends Controller
     public function viewRecord()
     {
         $user = User::find(auth()->id());
+        $now = Carbon::now();
         $today = Carbon::today();
         $latestWorkTime = $user->workTimes()->orderBy('created_at', 'desc')->first();
         $latestBreakTime = $latestWorkTime ? $latestWorkTime->breakTimes()->orderBy('created_at', 'desc')->first() : null;
@@ -30,7 +31,7 @@ class RecordController extends Controller
             $user->update(['status_id' => '1']);
         }
 
-        return view('record', compact('user'));
+        return view('record', compact('user', 'now'));
     }
 
     public function workStart()
